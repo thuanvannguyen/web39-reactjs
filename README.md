@@ -7,3 +7,7 @@
 
 - Gach dau dong 1
 - Gach dau dong 2
+
+```js
+console.log("123");
+```
