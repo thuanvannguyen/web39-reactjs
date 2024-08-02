@@ -1,6 +1,6 @@
 
 const ProductCard = ({product}) => {
-  console.log(product)
+  // console.log(product)
 
   const imgSrc = product.image;
   const altImg = product.title;
