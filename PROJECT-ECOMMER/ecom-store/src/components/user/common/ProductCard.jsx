@@ -1,12 +1,12 @@
+import { Link } from "react-router-dom";
 
-const ProductCard = ({product}) => {
-  // console.log(product)
-
+const ProductCard = ({ product }) => {
   const imgSrc = product.image;
   const altImg = product.title;
   const title = product.title;
   const price = product.price;
-  // console.log(imgSrc)
+
+  console.log(product);
 
   return (
     <>
@@ -19,11 +19,9 @@ const ProductCard = ({product}) => {
           Sale
         </div>
         {/* Product image*/}
-        <img
-          className="card-img-top"
-          src={imgSrc}
-          alt={altImg}
-        />
+        <Link to={`/product/${product.id}`}>
+          <img className="card-img-top" src={imgSrc} alt={altImg} />
+        </Link>
         {/* Product details*/}
         <div className="card-body p-4">
           <div className="text-center">

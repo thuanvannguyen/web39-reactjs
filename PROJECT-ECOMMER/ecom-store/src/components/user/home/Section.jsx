@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { productHome } from "../../../untils/mockup";
-import ProductCard from "../common/ProductCard";
-import axios from "axios";
-import { url } from "../../../untils/variable";
+import React from "react";
 import useCallApiNoPagination from "../../../hooks/useCallApiNoPagination";
+import { url } from "../../../untils/variable";
+import ProductCard from "../common/ProductCard";
 
 const Section = () => {
 
   const {data, isLoading} = useCallApiNoPagination(url);
-  console.log(data);
 
   // Check API call xong chua ?
   if (isLoading === true) return <p>Loading...</p>;

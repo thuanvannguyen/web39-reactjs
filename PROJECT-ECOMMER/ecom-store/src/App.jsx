@@ -1,12 +1,24 @@
-import Home from "./pages/user/Home"
-
-// Import File Styles.css
-import "./assets/css/styles.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/user/Home";
+import NotFound from "./pages/user/NotFound";
+import Layout from "./pages/user/Layout";
+import ProductDetail from "./pages/user/ProductDetail";
 
 const App = () => {
   return (
-    <Home/>
-  )
-}
+    <BrowserRouter>
+      <Routes>
 
-export default App
+        <Route path="/" element={<Layout/>} >
+          <Route index element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetail/>}/>
+
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
