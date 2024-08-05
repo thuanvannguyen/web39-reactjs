@@ -3,34 +3,16 @@ import { productHome } from "../../../untils/mockup";
 import ProductCard from "../common/ProductCard";
 import axios from "axios";
 import { url } from "../../../untils/variable";
+import useCallApiNoPagination from "../../../hooks/useCallApiNoPagination";
 
 const Section = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  // Call Api
-  useEffect(() => {
-    const getApi = async () => {
-      try {
-        // Du lieu dang duoc goi
-        setIsLoading(true);
-        const res = await axios.get(url);
-        // Du lieu goi xong roi
-        setData(res.data);
-        setIsLoading(false);
-
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getApi();
-  }, []);
-
-  // console.log(React);
+  const {data, isLoading} = useCallApiNoPagination(url);
+  console.log(data);
 
   // Check API call xong chua ?
-  if(isLoading === true) return <p>Loading...</p>
-  
+  if (isLoading === true) return <p>Loading...</p>;
+
   // Check san pham co ton tai hay khong
   if (data.length == 0) return <p>Khong ton tai san pham!</p>;
 
@@ -53,7 +35,6 @@ const Section = () => {
 };
 
 export default Section;
-
 
 // Dependencies:
 // TH1: -> Khong co gia tri gi: Logic useEffect se duoc call lien tuc. Gay ra tinh trang vong lap vo tan (call api)
