@@ -1,6 +1,7 @@
 import React from "react";
 
-const ProductSection = () => {
+const ProductSection = ({data}) => {
+  console.log(data);
   return (
     <section className="py-5">
       <div className="container px-4 px-lg-5 my-5">
@@ -8,16 +9,15 @@ const ProductSection = () => {
           <div className="col-md-6">
             <img
               className="card-img-top mb-5 mb-md-0"
-              src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg"
-              alt="..."
+              src={data.image}
+              alt={data.title}
             />
           </div>
           <div className="col-md-6">
             <div className="small mb-1">SKU: BST-498</div>
-            <h1 className="display-5 fw-bolder">Shop item template</h1>
+            <h1 className="display-5 fw-bolder">{data.title}</h1>
             <div className="fs-5 mb-5">
-              <span className="text-decoration-line-through">$45.00</span>
-              <span>$40.00</span>
+              <span>{data.price} VND</span>
             </div>
             <p className="lead">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
