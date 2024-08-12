@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  h2 {
+    @apply text-lime-400 ;
+  }
+}
+
+
+@layer components {
+  .card {
+    @apply w-40 h-80 bg-black;
+  }
+}
+
+@layer utilities {
+  .web-39 {
+    width: 100px;
+    height: 200px;
+    background-color: red;
+  }
+}
+
+
+/* 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+=> Cu phap giup custom va toi uu cac style cua taiwindcss
+- @tailwind base: Setup nhung thanh phan duoc su dung nhieu lan co ban tren tren trang
+
+- @tailwind components: Setup nhung thanh phan duoc su dung nhieu lan nhung phuc tap hop
+
+
+- @tailwind utilities: Setup nhung thanh phan do minh tu dinh nghia css (css thuan)
+*/
