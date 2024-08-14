@@ -5,6 +5,7 @@ import Layout from "./pages/user/Layout";
 import ProductDetail from "./pages/user/ProductDetail";
 import Dashboad from "./pages/admin/Dashboad";
 import LayoutAdmin from "./pages/admin/Layout";
+import Login from "./pages/auth/Login";
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+
+        <Route path="/login" element={<Login/>}/>
 
         <Route path="/dashboad" element={<LayoutAdmin />}>
           <Route index element={<Dashboad />} />

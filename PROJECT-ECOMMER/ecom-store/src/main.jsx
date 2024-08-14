@@ -11,6 +11,9 @@ import "./assets/admin/css/bootstrap-icons.css";
 import "./assets/admin/css/apexcharts.css";
 import "./assets/admin/css/main.css";
 
+// Import config taiwindcss
+import "./assets/config/tailwind.css"
+
 // Import JS Admin
 import "./assets/admin/js/jquery.min.js";
 import "./assets/admin/js/bootstrap.bundle.min.js";
