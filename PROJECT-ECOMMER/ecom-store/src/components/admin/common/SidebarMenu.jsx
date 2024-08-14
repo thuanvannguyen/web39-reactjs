@@ -1,11 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SidebarMenuAdmin = () => {
+
+  const redirect = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    redirect("/login");
+  }
   return (
     <nav
       id="sidebarMenu"
-      className="col-md-3 col-lg-3 d-md-block sidebar collapse"
+      className="col-md-3 col-lg-3 d-md-block sidebar"
     >
       <div className="position-sticky py-4 px-3 sidebar-sticky">
         <ul className="nav flex-column h-100">
@@ -32,10 +39,10 @@ const SidebarMenuAdmin = () => {
             </Link>
           </li>
           <li className="nav-item border-top mt-auto pt-2">
-            <Link className="nav-link" to="/dashboad">
+            <div className="nav-link" onClick={handleLogout}>
               <i className="bi-box-arrow-left me-2" />
               Logout
-            </Link>
+            </div>
           </li>
         </ul>
       </div>

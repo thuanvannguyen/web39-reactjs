@@ -6,6 +6,7 @@ import ProductDetail from "./pages/user/ProductDetail";
 import Dashboad from "./pages/admin/Dashboad";
 import LayoutAdmin from "./pages/admin/Layout";
 import Login from "./pages/auth/Login";
+import IsAuth from "./components/auth/IsAuth";
 
 const App = () => {
   return (
@@ -17,9 +18,12 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
 
-        <Route path="/dashboad" element={<LayoutAdmin />}>
+        <Route
+          path="/dashboad"
+          element={<IsAuth component={<LayoutAdmin />} />}
+        >
           <Route index element={<Dashboad />} />
         </Route>
       </Routes>
