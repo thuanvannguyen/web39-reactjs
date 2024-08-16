@@ -1,0 +1,34 @@
+import React from "react";
+import EditButtonDashboad from "./EditButton";
+import DeleteButtonDashboad from "./DeleteButton";
+
+const TbodyDashboad = ({ data }) => {
+
+
+  return (
+    <tbody>
+      {data.length > 0 &&
+        data.map((product) => {
+          // console.log(product)
+          return (
+            <tr key={product.id}>
+              <td scope="row">{product.id}</td>
+              <td scope="row">{product.title}</td>
+              <td scope="row">{product.content}</td>
+              <td className="text-danger" scope="row">
+                {product.price} Vnd
+              </td>
+              <td scope="row">
+                <EditButtonDashboad/>
+              </td>
+              <td scope="row">
+                <DeleteButtonDashboad id={product.id}/>
+              </td>
+            </tr>
+          );
+        })}
+    </tbody>
+  );
+};
+
+export default TbodyDashboad;

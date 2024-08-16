@@ -27,7 +27,7 @@ const SidebarMenuAdmin = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboad">
+            <Link className="nav-link" to="/dashboad/product">
               <i className="bi-house-fill me-2" />
               Sản phẩm
             </Link>

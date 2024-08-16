@@ -7,6 +7,7 @@ import Dashboad from "./pages/admin/Dashboad";
 import LayoutAdmin from "./pages/admin/Layout";
 import Login from "./pages/auth/Login";
 import IsAuth from "./components/auth/IsAuth";
+import DashboadProduct from "./pages/admin/DashboadProduct";
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
           element={<IsAuth component={<LayoutAdmin />} />}
         >
           <Route index element={<Dashboad />} />
+
+          <Route path="/dashboad/product" element={<DashboadProduct/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
