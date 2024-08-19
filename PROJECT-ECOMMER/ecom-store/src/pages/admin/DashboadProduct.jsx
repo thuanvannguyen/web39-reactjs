@@ -4,11 +4,11 @@ import TheadDashboad from "../../components/admin/table/Thead";
 import TbodyDashboad from "../../components/admin/table/Tbody";
 import useCallApiNoPagination from "../../hooks/useCallApiNoPagination";
 import { url } from "../../untils/variable";
+import { Link } from "react-router-dom";
 
 const DashboadProduct = () => {
   // Do du lieu
-  const { data, isLoading } = useCallApiNoPagination(url);
-  // console.log(data);
+  const { data, isLoading, removeItem } = useCallApiNoPagination(url);
 
   return (
     <>
@@ -19,7 +19,7 @@ const DashboadProduct = () => {
         <div className="col-lg-12 col-12">
           <div className="custom-block bg-white">
             <button className="px-4 bg-teal-500 text-white py-2 mb-3 rounded-xl">
-              Them Moi
+              <Link to="/dashboad/product/add">Them Moi</Link>
             </button>
 
             <div className="table-responsive">
@@ -37,7 +37,9 @@ const DashboadProduct = () => {
                     </tr>
                   </tbody>
                 )}
-                {!isLoading && <TbodyDashboad data={data} />}
+                {!isLoading && (
+                  <TbodyDashboad data={data} removeItem={removeItem} />
+                )}
               </table>
             </div>
             <PaginationDashboad />

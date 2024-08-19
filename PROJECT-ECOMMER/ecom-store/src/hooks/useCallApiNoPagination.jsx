@@ -15,7 +15,6 @@ const useCallApiNoPagination = (url) => {
         // Du lieu goi xong roi
         setData(res.data);
         setIsLoading(false);
-
       } catch (error) {
         console.log(error);
       }
@@ -23,7 +22,12 @@ const useCallApiNoPagination = (url) => {
     getApi();
   }, [url]);
 
-  return { data, isLoading };
-}
+  // Function to remove item from data
+  const removeItem = (id) => {
+    setData((oldData) => oldData.filter((item) => item.id !== id));
+  };
+
+  return { data, isLoading, removeItem };
+};
 
 export default useCallApiNoPagination;

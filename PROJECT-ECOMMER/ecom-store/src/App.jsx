@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/user/Home";
-import NotFound from "./pages/user/NotFound";
-import Layout from "./pages/user/Layout";
-import ProductDetail from "./pages/user/ProductDetail";
+import IsAuth from "./components/auth/IsAuth";
 import Dashboad from "./pages/admin/Dashboad";
+import DashboadProduct from "./pages/admin/DashboadProduct";
+import DashboadProductAdd from "./pages/admin/DashboadProductAdd";
 import LayoutAdmin from "./pages/admin/Layout";
 import Login from "./pages/auth/Login";
-import IsAuth from "./components/auth/IsAuth";
-import DashboadProduct from "./pages/admin/DashboadProduct";
+import Home from "./pages/user/Home";
+import Layout from "./pages/user/Layout";
+import NotFound from "./pages/user/NotFound";
+import ProductDetail from "./pages/user/ProductDetail";
 
 const App = () => {
   return (
@@ -27,7 +28,15 @@ const App = () => {
         >
           <Route index element={<Dashboad />} />
 
-          <Route path="/dashboad/product" element={<DashboadProduct/>}/>
+          <Route path="/dashboad/product" element={<DashboadProduct />} />
+          <Route
+            path="/dashboad/product/add"
+            element={<DashboadProductAdd />}
+          />
+          <Route
+            path="/dashboad/product/edit"
+            element={<DashboadProductAdd />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

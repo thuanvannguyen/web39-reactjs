@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { url } from "../../../untils/variable";
 import { Bounce, toast } from "react-toastify";
 
-const DeleteButtonDashboad = ({ id }) => {
+const DeleteButtonDashboad = ({ id, removeItem }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDetele = () => {
@@ -14,7 +14,10 @@ const DeleteButtonDashboad = ({ id }) => {
         console.log(response);
         setIsLoading(false); // Xoa xong r
 
-        toast.success('Xoa Thanh Cong!', {
+        // Call the removeItem function to update the data
+        removeItem(id);
+
+        toast.success("Xoa Thanh Cong!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -24,11 +27,11 @@ const DeleteButtonDashboad = ({ id }) => {
           progress: undefined,
           theme: "light",
           transition: Bounce,
-          });
+        });
       } catch (error) {
         setIsLoading(false);
 
-        toast.error('Xoa That Bai', {
+        toast.error("Xoa That Bai", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -38,8 +41,8 @@ const DeleteButtonDashboad = ({ id }) => {
           progress: undefined,
           theme: "light",
           transition: Bounce,
-          });
-          
+        });
+
         throw new error();
       }
     };

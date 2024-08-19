@@ -1,10 +1,9 @@
 import React from "react";
 import EditButtonDashboad from "./EditButton";
 import DeleteButtonDashboad from "./DeleteButton";
+import { Link } from "react-router-dom";
 
-const TbodyDashboad = ({ data }) => {
-
-
+const TbodyDashboad = ({ data, removeItem }) => {
   return (
     <tbody>
       {data.length > 0 &&
@@ -19,10 +18,12 @@ const TbodyDashboad = ({ data }) => {
                 {product.price} Vnd
               </td>
               <td scope="row">
-                <EditButtonDashboad/>
+                <Link to={"/dashboad/product/edit"}>
+                  <EditButtonDashboad />
+                </Link>
               </td>
               <td scope="row">
-                <DeleteButtonDashboad id={product.id}/>
+                <DeleteButtonDashboad id={product.id} removeItem={removeItem} />
               </td>
             </tr>
           );
