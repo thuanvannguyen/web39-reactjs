@@ -8,6 +8,8 @@ import LayoutAdmin from "./pages/admin/Layout";
 import Login from "./pages/auth/Login";
 import IsAuth from "./components/auth/IsAuth";
 import DashboadProduct from "./pages/admin/DashboadProduct";
+import CreateProduct from "./pages/admin/CreateProduct";
+import EditProduct from "./pages/admin/EditProduct";
 
 const App = () => {
   return (
@@ -26,8 +28,11 @@ const App = () => {
           element={<IsAuth component={<LayoutAdmin />} />}
         >
           <Route index element={<Dashboad />} />
+          <Route path="/dashboad/product" element={<DashboadProduct/>}/>          
 
-          <Route path="/dashboad/product" element={<DashboadProduct/>}/>
+          <Route path="/dashboad/product/add" element={<CreateProduct/>}/>
+
+          <Route path="/dashboad/product/edit" element={<EditProduct/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
