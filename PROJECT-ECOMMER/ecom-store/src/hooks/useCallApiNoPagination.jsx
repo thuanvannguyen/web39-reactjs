@@ -23,7 +23,17 @@ const useCallApiNoPagination = (url) => {
     getApi();
   }, [url]);
 
-  return { data, isLoading };
+
+  // Logic Update Data when remove item -> Cap nhat lai gia tri data
+  const removeItem = (id) => { //5
+    const newData = data.filter((oldDta)=> {
+      return oldDta.id !== id;
+    })
+
+    return setData(newData);
+  }
+
+  return { data, isLoading, removeItem};
 }
 
 export default useCallApiNoPagination;

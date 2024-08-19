@@ -2,7 +2,7 @@ import React from "react";
 import EditButtonDashboad from "./EditButton";
 import DeleteButtonDashboad from "./DeleteButton";
 
-const TbodyDashboad = ({ data }) => {
+const TbodyDashboad = ({ data, removeItem }) => {
 
 
   return (
@@ -22,7 +22,7 @@ const TbodyDashboad = ({ data }) => {
                 <EditButtonDashboad/>
               </td>
               <td scope="row">
-                <DeleteButtonDashboad id={product.id}/>
+                <DeleteButtonDashboad id={product.id} removeItem={removeItem}/>
               </td>
             </tr>
           );

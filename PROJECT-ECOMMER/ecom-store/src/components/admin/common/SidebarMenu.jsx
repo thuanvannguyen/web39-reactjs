@@ -1,33 +1,34 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SidebarMenuAdmin = () => {
-
   const redirect = useNavigate();
+  const isActive = useLocation(); // Current Path URL
 
   const handleLogout = () => {
     localStorage.clear();
     redirect("/login");
-  }
+  };
+
+  // Check URL
+  const menuActive = (path) => {
+    return isActive.pathname == path ? "nav-link active" : "nav-link";
+  };
   return (
-    <nav
-      id="sidebarMenu"
-      className="col-md-3 col-lg-3 d-md-block sidebar"
-    >
+    <nav id="sidebarMenu" className="col-md-3 col-lg-3 d-md-block sidebar">
       <div className="position-sticky py-4 px-3 sidebar-sticky">
         <ul className="nav flex-column h-100">
           <li className="nav-item">
-            <Link
-              className="nav-link active"
-              aria-current="page"
-              to="/dashboad"
-            >
+            <Link className={menuActive("/dashboad")} to="/dashboad">
               <i className="bi-house-fill me-2" />
               Tổng quan
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboad/product">
+            <Link
+              className={menuActive("/dashboad/product")}
+              to="/dashboad/product"
+            >
               <i className="bi-house-fill me-2" />
               Sản phẩm
             </Link>

@@ -7,7 +7,7 @@ import { url } from "../../untils/variable";
 
 const DashboadProduct = () => {
   // Do du lieu
-  const { data, isLoading } = useCallApiNoPagination(url);
+  const { data, isLoading, removeItem } = useCallApiNoPagination(url);
   // console.log(data);
 
   return (
@@ -37,7 +37,7 @@ const DashboadProduct = () => {
                     </tr>
                   </tbody>
                 )}
-                {!isLoading && <TbodyDashboad data={data} />}
+                {!isLoading && <TbodyDashboad data={data} removeItem={removeItem}/>}
               </table>
             </div>
             <PaginationDashboad />

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { url } from "../../../untils/variable";
 import { Bounce, toast } from "react-toastify";
 
-const DeleteButtonDashboad = ({ id }) => {
+const DeleteButtonDashboad = ({ id, removeItem }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDetele = () => {
@@ -13,6 +13,10 @@ const DeleteButtonDashboad = ({ id }) => {
         const response = await axios.delete(url + "/" + id);
         console.log(response);
         setIsLoading(false); // Xoa xong r
+
+        // Cap nhat du lieu data listing
+        removeItem(id);
+
 
         toast.success('Xoa Thanh Cong!', {
           position: "top-right",
@@ -25,6 +29,7 @@ const DeleteButtonDashboad = ({ id }) => {
           theme: "light",
           transition: Bounce,
           });
+
       } catch (error) {
         setIsLoading(false);
 
