@@ -3,11 +3,15 @@ import ProductLabel from "./ProductLabel";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { url } from "../../../untils/variable";
+import { Bounce, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const classInput = `block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-1 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`;
 
 const ProductForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const redirect = useNavigate();
 
   // Khai bao react hook form
   const {
@@ -23,8 +27,24 @@ const ProductForm = () => {
 
       // Tao moi san pham
       await axios.post(url, data);
-
       setIsLoading(false);
+
+      toast.success('Them san pham thanh cong', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+        
+        setTimeout(()=>{
+          redirect("/dashboad/product/");
+        }, 1500);
+
     } catch (error) {
       setIsLoading(false);
       throw new error;
@@ -43,9 +63,10 @@ const ProductForm = () => {
           id="floating_email"
           className={classInput}
           placeholder=" "
-          {...register("title")}
+          {...register("title", {required: true})}
         />
-        <ProductLabel htmlFor="floating_email" name="Title" />
+        <ProductLabel htmlFor="floating_email" name="Title" required={true}/>
+        {errors.title && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
@@ -65,9 +86,11 @@ const ProductForm = () => {
           id="floating_repeat_password"
           className={classInput}
           placeholder=" "
-          {...register("image")}
+          {...register("image", {required: true})}
         />
-        <ProductLabel htmlFor="floating_repeat_password" name="Image" />
+        <ProductLabel htmlFor="floating_repeat_password" name="Image" required={true}/>
+        {errors.image && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
+
       </div>
       <div className="grid md:grid-cols-1 md:gap-6">
         <div className="relative z-0 w-full mb-5 group">
@@ -78,17 +101,19 @@ const ProductForm = () => {
             className={classInput}
             placeholder=" "
             required=""
-            {...register("price")}
+            {...register("price", {required: true})}
           />
 
-          <ProductLabel htmlFor="floating_first_name" name="Price" />
+          <ProductLabel htmlFor="floating_first_name" name="Price" required={true}/>
+          {errors.price && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
+
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <label
             htmlFor="message"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
-            Product Content
+            Product Content <span className="text-[#FF0000]">*</span>
           </label>
           <textarea
             id="message"
@@ -96,8 +121,9 @@ const ProductForm = () => {
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Content Product..."
             name="content"
-            {...register("content")}
+            {...register("content", {required: true})}
           ></textarea>
+          {errors.content &&  <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
         </div>
       </div>
       <button
