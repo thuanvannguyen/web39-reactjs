@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useCallApiNoPagination = (url, initialPage = 1, itemsPerPage = 5) => {
+const useCallApiNoPagination = (url, itemsPerPage = 5) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(initialPage); //-> State để theo dõi trang hiện tại
+  const [currentPage, setCurrentPage] = useState(1); //-> State để theo dõi trang hiện tại
   const [totalPages, setTotalPages] = useState(1); //-> State để lưu trữ tổng số trang
+
+  let params = `?_page=${currentPage}&_limit=${itemsPerPage}`;
 
   const getApi = async () => {
     try {
-      let params = `?_page=${currentPage}&_limit=${itemsPerPage}`;
-
       // Du lieu dang duoc goi
       setIsLoading(true);
       const res = await axios.get(url + params);
