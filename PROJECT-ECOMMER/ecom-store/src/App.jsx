@@ -32,7 +32,7 @@ const App = () => {
 
           <Route path="/dashboad/product/add" element={<CreateProduct/>}/>
 
-          <Route path="/dashboad/product/edit" element={<EditProduct/>}/>
+          <Route path="/dashboad/product/edit/:id" element={<EditProduct/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

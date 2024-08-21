@@ -18,7 +18,7 @@ const TbodyDashboad = ({ data, removeItem }) => {
                 {product.price} Vnd
               </td>
               <td scope="row">
-                <Link to={"/dashboad/product/edit"}>
+                <Link to={`/dashboad/product/edit/${product.id}`}>
                   <EditButtonDashboad />
                 </Link>
               </td>

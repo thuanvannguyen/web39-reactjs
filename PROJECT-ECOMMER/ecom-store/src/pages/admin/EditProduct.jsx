@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductForm from "../../components/admin/form/ProductForm";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useCallApiNoPagination from "../../hooks/useCallApiNoPagination";
+import { url } from "../../untils/variable";
 
 const EditProduct = () => {
+  // Lay id field can edit
+  const { id } = useParams();
+
+  // id -> GET Data
+  const URL_DETAIL = url + `/${id}`;
+  const { data, isLoading } = useCallApiNoPagination(URL_DETAIL);
+
   return (
     <>
       <div className="title-group mb-3">
@@ -16,7 +25,8 @@ const EditProduct = () => {
               <Link to={"/dashboad/product/"}>Trả về</Link>
             </button>
 
-            <ProductForm />
+            {isLoading && <p>Loading...</p>}
+            {!isLoading && <ProductForm dataOld={data} URL_DETAIL={URL_DETAIL}/>}
           </div>
         </div>
       </div>

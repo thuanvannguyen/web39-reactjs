@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 const classInput = `block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-1 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`;
 
-const ProductForm = () => {
+const ProductForm = ({ dataOld, URL_DETAIL }) => {
+  // console.log(dataOld);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const redirect = useNavigate();
@@ -17,37 +19,94 @@ const ProductForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: dataOld ? dataOld.title : "",
+      category: dataOld ? dataOld.category : "",
+      image: dataOld ? dataOld.image : "",
+      price: dataOld ? dataOld.price : "",
+      content: dataOld ? dataOld.content : "",
+    },
+  });
 
   const onSubmit = async (data) => {
+    // console.log(data);
     try {
-      setIsLoading(true);
 
-      // Tao moi san pham
-      await axios.post(url, data);
-      setIsLoading(false);
+      if (!dataOld) {
+        // Tao moi san pham
+        setIsLoading(true);
+        await axios.post(url, data);
+        setIsLoading(false);
 
-      toast.success('Them san pham thanh cong', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+        toast.success("Them san pham thanh cong", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
         });
-        
-        setTimeout(()=>{
-          redirect("/dashboad/product/");
-        }, 1500);
+      }
 
+      if(dataOld) {
+        // Edit san pham
+        setIsLoading(true);
+        await axios.patch(URL_DETAIL, data);
+        setIsLoading(false);
+
+        toast.success("Edit san pham thanh cong", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+
+      // Chuyen huong ve trang listing
+      setTimeout(() => {
+        redirect("/dashboad/product/");
+      }, 1500);
     } catch (error) {
       setIsLoading(false);
-      throw new error;
+
+      if(!dataOld) {
+        toast.error('Thêm mới không thành công!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          }); 
+      }
+      if(dataOld) {
+        toast.error('Edit không thành công!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          }); 
+      }
+
+      throw new error();
     }
   };
 
@@ -63,10 +122,14 @@ const ProductForm = () => {
           id="floating_email"
           className={classInput}
           placeholder=" "
-          {...register("title", {required: true})}
+          {...register("title", { required: true })}
         />
-        <ProductLabel htmlFor="floating_email" name="Title" required={true}/>
-        {errors.title && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
+        <ProductLabel htmlFor="floating_email" name="Title" required={true} />
+        {errors.title && (
+          <span className="text-[#FF0000] text-sm">
+            Trường dữ liệu không được để trống!
+          </span>
+        )}
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
@@ -81,16 +144,24 @@ const ProductForm = () => {
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
+          disabled={dataOld ? true : false}
           type="text"
           name="image"
           id="floating_repeat_password"
           className={classInput}
           placeholder=" "
-          {...register("image", {required: true})}
+          {...register("image", { required: true })}
         />
-        <ProductLabel htmlFor="floating_repeat_password" name="Image" required={true}/>
-        {errors.image && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
-
+        <ProductLabel
+          htmlFor="floating_repeat_password"
+          name="Image"
+          required={true}
+        />
+        {errors.image && (
+          <span className="text-[#FF0000] text-sm">
+            Trường dữ liệu không được để trống!
+          </span>
+        )}
       </div>
       <div className="grid md:grid-cols-1 md:gap-6">
         <div className="relative z-0 w-full mb-5 group">
@@ -101,12 +172,19 @@ const ProductForm = () => {
             className={classInput}
             placeholder=" "
             required=""
-            {...register("price", {required: true})}
+            {...register("price", { required: true })}
           />
 
-          <ProductLabel htmlFor="floating_first_name" name="Price" required={true}/>
-          {errors.price && <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
-
+          <ProductLabel
+            htmlFor="floating_first_name"
+            name="Price"
+            required={true}
+          />
+          {errors.price && (
+            <span className="text-[#FF0000] text-sm">
+              Trường dữ liệu không được để trống!
+            </span>
+          )}
         </div>
         <div className="relative z-0 w-full mb-5 group">
           <label
@@ -121,15 +199,21 @@ const ProductForm = () => {
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Content Product..."
             name="content"
-            {...register("content", {required: true})}
+            {...register("content", { required: true })}
           ></textarea>
-          {errors.content &&  <span className="text-[#FF0000] text-sm">Trường dữ liệu không được để trống!</span>}
+          {errors.content && (
+            <span className="text-[#FF0000] text-sm">
+              Trường dữ liệu không được để trống!
+            </span>
+          )}
         </div>
       </div>
       <button
         disabled={isLoading ? true : false}
         type="submit"
-        className={`text-white ${isLoading ? "bg-dark" : "bg-blue-700"} hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}
+        className={`text-white ${
+          isLoading ? "bg-dark" : "bg-blue-700"
+        } hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center`}
       >
         Save change
       </button>
