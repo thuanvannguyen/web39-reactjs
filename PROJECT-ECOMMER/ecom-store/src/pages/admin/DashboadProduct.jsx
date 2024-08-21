@@ -8,7 +8,14 @@ import { Link } from "react-router-dom";
 
 const DashboadProduct = () => {
   // Do du lieu
-  const { data, isLoading, removeItem } = useCallApiNoPagination(url);
+  const {
+    data,
+    isLoading,
+    removeItem,
+    totalPages,
+    setCurrentPage,
+    currentPage,
+  } = useCallApiNoPagination(url);
 
   return (
     <>
@@ -42,7 +49,11 @@ const DashboadProduct = () => {
                 )}
               </table>
             </div>
-            <PaginationDashboad />
+            <PaginationDashboad
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </div>
         </div>
       </div>
