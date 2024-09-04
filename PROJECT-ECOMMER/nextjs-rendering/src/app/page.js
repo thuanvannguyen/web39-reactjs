@@ -4,16 +4,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
+// Lay du lieu tu API
+const getData = async () => {
+  const res = await fetch('http://localhost:3000/api/blog', { next: { revalidate: 3600 } });
+
+  if(!res.ok) {
+    throw new Error("Databse Error!")
+  }
+  return res.json();
+}
+
+
 const Home = async () => {
-  const posts = await getPosts();
+
+  // Lay du lieu truc tiep tu mongodb
+  // const posts = await getPosts();
+
+  const posts = await getData();
   // console.log(posts);
+
+
+
   return (
     <>
       <Banner />
       <section className="py-5">
         <div className="container px-4 px-lg-5 mt-5">
           <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {posts.map((value) => {
+            {(posts.length > 0) && posts.map((value) => {
               console.log(value);
               return (
                 <div className="col mb-5" key={value.id}>

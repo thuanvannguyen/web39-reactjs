@@ -39,7 +39,7 @@ import { connectToDb } from "./untils";
 export const getPosts = async () => {
   try {
     connectToDb();
-    const posts = await Post.find();
+    const posts = await Post.find(); 
     return posts;
   } catch (err) {
     console.log(err);
