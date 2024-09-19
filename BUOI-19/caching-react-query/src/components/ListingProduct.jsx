@@ -21,7 +21,7 @@ const ListingProduct = () => {
       </thead>
       <tbody>
         {data.map((value) => {
-          console.log(value);
+          // console.log(value);
           return (
             <tr key={value.id}>
               <td>{value.id}</td>

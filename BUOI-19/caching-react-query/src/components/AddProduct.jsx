@@ -15,7 +15,7 @@ const AddProduct = ({ name, ...props }) => {
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Add New Product</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <FormProduct/>
